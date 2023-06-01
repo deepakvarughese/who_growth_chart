@@ -70,7 +70,8 @@ wfa.g <- ggplot(wfa_g_05, aes(x=Month)) +
   geom_ribbon(aes(ymin=SD2neg, ymax=SD2), fill = "#009E73",alpha = 0.10) +
   geom_ribbon(aes(ymin=SD1neg, ymax=SD1), fill = "#009E76",alpha = 0.10) +
   geom_ribbon(aes(ymin=SD2, ymax=28), fill = "#D55E00",alpha = 0.10) +
-  geom_point(aes(x = wt1 , y = age1)) 
+  geom_point(aes(x = wt1 , y = age1), size = 1.5) +
+  geom_point(aes(x = wt1 , y = age1), shape = 4, size = 3, alpha =0.20)
 
 
 
@@ -78,9 +79,11 @@ wfa.g <- ggplot(wfa_g_05, aes(x=Month)) +
 # If Else Statement to print appropriate Chart
 
 if (sex == "male") {
-  print(wfa.b)
+  outcome <- wfa.b
 } else if (sex == "female") {
-  print(wfa.g)
+  outcome <- wfa.g
 }
+
+outcome
 
 

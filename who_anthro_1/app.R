@@ -1,5 +1,5 @@
 library(shiny)
-library(shinyWidgets)
+library(shinythemes)
 library(ggplot2)
 library(rsconnect)
 
@@ -7,8 +7,10 @@ library(rsconnect)
 
 
 ui<-fluidPage(
-    
+    theme = shinytheme("united"),
     titlePanel("WHO Anthropometry"),
+    sidebarLayout(
+        sidebarPanel(
     sliderInput(inputId = "age1", label = "Age of Child in months", min = 0, max = 60,
                  value =5), 
     sliderInput(inputId = "wt1", label = "Weight of the child in Kg", min = 0, max =  40, value = 5),
@@ -16,10 +18,13 @@ ui<-fluidPage(
                  label = "Choose sex",
                  choices = c("male" = "male",
                              "Female" = "female"),
-                 inline = TRUE),
+                 inline = TRUE)
+    
+    ),
+    
+    
     mainPanel(plotOutput("plot")
-    )
-)
+    )))
 
 
 
@@ -43,7 +48,7 @@ server<-function(input,output){
             geom_vline(xintercept = c(1,2,6,12,18,24,36,48,60),
                        linetype="longdash", colour="#999999") +
             ylab("Weight (Kg)") +
-            ggtitle(paste("Weight For Age 0-60 Months" , sex, sep = " - "))+
+            ggtitle(paste("Weight For Age 0-60 Months" , input$sex, sep = " - "))+
             theme(panel.border = element_blank()) +
             geom_ribbon(aes(ymin=0, ymax=SD2neg), fill = "#D55E00",alpha = 0.10) +
             geom_ribbon(aes(ymin=SD2neg, ymax=SD2), fill = "#009E73",alpha = 0.10) +

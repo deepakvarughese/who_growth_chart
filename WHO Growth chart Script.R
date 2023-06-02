@@ -12,7 +12,7 @@ wfa_g_05 <- import("wfa_girls_0-to-5-years.xlsx")
 
 
 wfa_b_05 <- wfa_b_05 %>% 
-  mutate(sex = "male")
+  mutate(gender = "male")
 
 wfa_g_05 <- wfa_g_05 %>% 
   mutate(gender = "female")

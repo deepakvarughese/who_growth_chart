@@ -2,8 +2,25 @@ library(shiny)
 library(shinythemes)
 library(ggplot2)
 library(rsconnect)
+library(tidyverse)
+library(here)
+library(rio)
+library(janitor)
 
 
+## Importing Data
+wfa_b_05 <- import("wfa_boys_0-to-5_boys.xlsx")
+wfa_g_05 <- import("wfa_girls_0-to-5-years.xlsx")
+
+
+wfa_b_05 <- wfa_b_05 %>% 
+    mutate(gender = "male")
+
+wfa_g_05 <- wfa_g_05 %>% 
+    mutate(gender = "female")
+
+
+wfa <- bind_rows(wfa_b_05 , wfa_g_05)
 
 
 ui<-fluidPage(
@@ -30,7 +47,9 @@ ui<-fluidPage(
 
 
 server<-function(input,output){
-    output$plot<- renderPlot({
+    output$plot<- renderPlot(
+        width = "auto", 
+        height = 720,{
        wfa %>% 
             filter( gender == input$sex) %>% 
             ggplot(aes(x=Month)) +

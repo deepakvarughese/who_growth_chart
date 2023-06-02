@@ -23,9 +23,7 @@ wfa <- bind_rows(wfa_b_05 , wfa_g_05)
 ## Input Variables
 age1 <- 12
 wt1 <- 12
-sex <- "male"
-
-
+sex <- "female"
 
 
 wfa_plot <-wfa %>% 
